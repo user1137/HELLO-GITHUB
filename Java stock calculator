@@ -1,0 +1,105 @@
+// Alansmith Simanivanh
+// lab9 
+// 11.27.2018
+
+
+package lab9;
+
+public class Stock {
+
+	// properties 
+	
+	private double curPrice = 0;
+	private String symbol = "";
+	private double purPrice = 0;
+	private boolean dividend = false;
+	
+	// method
+	public void setSymbol(String newSymbol)
+	{
+		symbol = newSymbol;
+	}
+	public void setCurPrice(double newCurPrice)
+	{
+		curPrice = newCurPrice;
+	}
+	public void setPurPrice(double newPurPrice)
+	{
+		purPrice = newPurPrice;
+	}
+	public void setDividend(boolean newDividend)
+	{
+		dividend = newDividend;
+	}
+	
+	//get method
+	public String getSymbol()
+	{
+		return symbol;
+	}
+	public double getCurPrice()
+	{
+		return curPrice;
+	}
+	public double getPurPrice()
+	{
+		return purPrice;
+	}
+	// calculate profit and dividend method
+	
+	public double calcProfit()
+	{
+		double profit = 0;
+		profit = curPrice - purPrice;
+		return profit;
+	}
+	public double calcDividend()
+	{
+		double pay = 0;
+		
+		if (dividend) 
+			// if dividen is true current price * 0.04
+			pay = curPrice * 0.04;
+		return pay;
+	}
+	
+	public static void main(String[] arges) // main
+	{ 
+		// create s1 and s2 object
+		Stock s1 = new Stock();
+		Stock s2 = new Stock();
+		
+		s1.setCurPrice(150);
+		s1.setPurPrice(20);
+		s1.setSymbol("INTC");
+		s1.setDividend(false);
+		
+		
+		s2.setCurPrice(173.15);
+		s2.setPurPrice(23.21);
+		s2.setSymbol("AAPL");
+		s2.setDividend(true);
+		
+		// invoke get and calc method from Stock class
+		System.out.println(s1.getSymbol());
+		System.out.println(s1.getCurPrice());
+		System.out.println(s1.getPurPrice());
+		
+		System.out.println(s1.calcDividend());
+		System.out.println(s1.calcProfit());
+		
+		System.out.println("--------------");
+		
+		System.out.println(s2.getSymbol());
+		System.out.println(s2.getCurPrice());
+		System.out.println(s2.getPurPrice());
+		
+		
+		System.out.println(s2.calcDividend());
+		System.out.println(s2.calcProfit());
+	}
+	
+}
+
+
+ 
