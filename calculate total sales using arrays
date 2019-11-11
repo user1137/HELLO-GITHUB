@@ -1,0 +1,194 @@
+
+
+
+import java.util.Scanner;
+import java.io.FileNotFoundException; // import library to output total to txt file
+import java.io.PrintWriter;  // import library to output total to txt file
+import java.util.Arrays;
+
+public class HW3 {
+	
+	public static void main(String[] args) { // main has string and int arrays 
+		
+		int total =0;
+		int choice=0; 
+		
+		
+		
+		Scanner input = new Scanner(System.in);
+		
+		String [][] printSale = new String[][] // string array to preview the sale of each day and truck
+							  {{"\t", "Truck1", "Truck2", "Truck3"} ,
+							   {"Friday\t","350\t", "434\t", "129"} ,
+							   {"Saturday","490\t", "245\t", "398"} ,
+							   {"Sunday\t", "534\t", "385\t", "256"}};
+								
+							   for(int i = 0; i < printSale.length; i++) // for loop to print out string array
+							   {
+							       for(int j = 0; j < printSale[i].length; j++)
+							       {
+							           System.out.print(printSale[i][j]);
+							           if(j < printSale[i].length - 1) System.out.print(" ");
+							       }
+							       System.out.println();
+							   }
+		
+		int [][] tacoSale = // int array to hold values of each day and each truck sales
+							{{ 350, 434, 129},
+							{  490, 245, 398},
+							{  534, 385, 256}};
+		
+		do { // do while loop to prompt user sum of truck, day, and total
+		System.out.println("Please enter choice\n"
+				+ "1. sum of the total sale\n"
+				+ "2. sum of truck\n"
+				+ "3. sum of sale a day\n"
+				+ "4. Exit");
+		choice = input.nextInt();
+		
+		switch(choice) { // I used switch case to choose each method 
+		
+		case 1:
+		sumMethod(tacoSale,choice); // total sales of each and and truck
+		break;
+		case 2:
+		truckMethod(tacoSale, choice); // truck method to determine which truck's total sales user want to see
+		break;
+		case 3:
+		dayMethod(tacoSale, choice);// day method to choose which truck's total sale user want to see
+		break;
+		case 4:
+			System.out.print("thank you for using Alan's program");
+			input.close(); // hit 4 to end program
+		
+		} 
+		}while (choice != 4); // while choice isn't 4, keep looping
+		
+	}
+
+	
+	public static void sumMethod(int tacoSale[][], int choice)    { // send array from main and choice to calculate total in this method
+		
+	
+		
+	int sum = 0;
+	
+	for (int rows = 0; rows < tacoSale.length; rows++){ // sum of all rows and columns of each day and truck sale
+        for (int cols = 0; cols < tacoSale[0].length; cols++){
+          sum += tacoSale[rows][cols];
+     }
+ }
+
+ System.out.println("The final total sale is: " +sum); // print out total
+
+
+		// requirment to output grandtotal into txt file, in this case I output into my laptop eclipse folder
+		try (PrintWriter out = new PrintWriter("C:\\Users\\maxsp\\eclipse\\java-photon\\eclipse\\total.txt")) {
+			out.println(sum);// output sum into file
+		} catch (FileNotFoundException w) {
+			w.printStackTrace(); 
+		}
+
+	    }
+
+
+
+	
+	
+	
+	// after user choose sum of truck, users will be lead to this method to choose which truck's total sale to output
+	public static void truckMethod(int tacoSale[][],int choice) {
+		
+		int sumTruck1 = 0;
+		int sumTruck2 = 0; // 3variables to hold each day's total sale
+		int sumTruck3 = 0;
+		int truck = 0; // truck variables will be used in switch case
+		int cols=0;// column variable here is set to 0 because only rows variable changes in this method
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("which truck you want to print out the total\n"+
+				"1. Truck1 \n"+
+				"2. Truck2 \n"+
+				"3. Truck3");
+				truck = in.nextInt();
+				
+	switch(truck) { // using switch case again because it's easier to understand 
+	
+	case 1 : // truck1 sum
+		for (cols = 0; cols < tacoSale.length; cols++){ // sum of truck1 which is column 0 rows 0
+	     {
+	       sumTruck1 += tacoSale[cols][0];
+		}
+	     }	System.out.println("Total sale of truck #1 is: " +sumTruck1);
+	     break;
+	     
+	     // truck2 sum 
+	case 2 :
+	     for (cols = 0; cols < tacoSale.length; cols++){ // truck2 which is column0 and rows1
+	         {
+	           sumTruck2 += tacoSale[cols][1];
+	    	}
+	         }	System.out.println("Total sale of truck #2 is: " + sumTruck2);
+	         break;
+	case 3 :      
+	       // truck3 sum
+	         for (cols = 0; cols < tacoSale.length; cols++){ // truck2 which is column0 and rows2
+	             {
+	               sumTruck3 += tacoSale[cols][2];
+	        	}
+	             }	System.out.println("Total sale of truck #3 is: " + sumTruck3);
+	             break;
+	}      
+	}      
+	             
+	     // day method, after users have been prompted to choose sum of a day sale
+		// they will be lead to this method for which day's total sale they want to see
+	  public static void dayMethod(int tacoSale[][], int choice) {
+		int friday=0;
+		int saturday=0; // 3variables to hold total for each day
+		int sunday=0;
+		int day =0; // day will be used in switch case
+		int rows=0;// rows variable here is set to 0 because only columns variable changes in this method
+		Scanner in = new Scanner(System.in);
+		System.out.println("which day you want to print out the total\n"+ // prompt to ask which day
+							"1. Friday\n"+
+							"2. Saturday\n"+
+							"3. Sunday");
+		day = in.nextInt();
+		
+	            
+				switch(day) // switch case 
+	            {
+	             // Friday sum
+	             case 1 :
+	             for (rows = 0; rows < tacoSale.length; rows++){ // row0, column0 for Friday
+	                 {
+	                   friday += tacoSale[0][rows];
+	            	}
+	                 }	System.out.println("total sale of Friday is: "+friday);
+	                 break;
+	          // Saturday sum
+	             case 2:
+	                 for (rows = 0; rows < tacoSale.length; rows++){ // row0, column1 for Saturday
+	                     {
+	                       saturday += tacoSale[1][rows];
+	                	}
+	                     }	System.out.println("total sale of Saturday is: "+ saturday); 
+	                     break;
+	           // Sunday sum 
+	                     
+	             case 3:
+	                 for (rows = 0; rows < tacoSale.length; rows++){// row0, column2 for Sunday
+	                     {
+	                       sunday += tacoSale[2][rows];
+	                	}
+	                     }	System.out.println("total sale of Sunday is: "+sunday); // 
+	                     break;
+	       
+	            }
+	        
+	 }
+}
+
+	  
+
