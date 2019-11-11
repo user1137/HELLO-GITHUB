@@ -1,0 +1,178 @@
+
+
+
+
+
+import java.util.Scanner;
+import java.util.ArrayList; 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.io.File;
+
+
+
+public class Hangman {
+
+	public static void main(String[] args) throws Exception {
+	
+		// hangman
+				//create objects and variables
+				Scanner input = new Scanner(System.in);
+				String words[];    //declaring array
+				words = new String[10];  // allocating 10 to array
+				String hangWord = ""; //the word to be guessed
+				String usedLets[] = new String[20];  //array to hold letter already guessed
+				
+				int index = 0;  // for words[]
+				int index1 = 0;  // for usedLet[]
+				String guess = "";
+				char answer ='y';
+				
+				
+				
+				
+				
+				//load the words array from .txt file
+				File File1 = new File("C:\\Users\\maxsp\\Desktop\\hangmanWords.txt");  // File object
+				Scanner fileIN = new Scanner(File1);  //to READ txt file
+				
+				
+				
+					
+				for(int i=0; i < words.length; i++)
+				{
+					words[i] = fileIN.next(); //read txt file
+				}
+				
+				System.out.println(Arrays.toString(words));  //output the loaded array
+				
+				do // do to loop the program
+				{
+					boolean match = false;
+					int badTries= 0; 
+					List<String> usedWord = new ArrayList<String>(); // put used words into this array 
+						
+				hangWord = words[index];
+				index++;
+				
+				String userWord[] = new String [hangWord.length()];  //letters the user has guess correctly in the word
+				//String userWord = "";  //parts of the word the user has guess correctly so far
+				
+			
+						Arrays.fill(userWord, "-");	 //fill array with "-"
+						Arrays.fill(usedLets, "-");	 //fill array with "-"
+						
+				System.out.println("This word has " + hangWord.length() + " letters");		
+				
+				
+				
+				
+				
+				while((!match) && (badTries < 10))
+				{
+					System.out.println(Arrays.deepToString(userWord)); 
+					
+					System.out.println("What letter do you want to guess?");			
+					guess = input.next();   //get users guess
+					
+					
+					
+					while(!guess.matches("[a-zA-Z]{1}"))    //validate that it is a - Z 1 character
+							{
+						System.out.println("You must enter a SINGLE alpha character.  What letter do you want to guess?");			
+						guess = input.next();   //get users guess
+						
+							}
+					//convert guess to UPPPERCASE
+					guess = (guess.toUpperCase());
+					
+					Arrays.sort(usedLets);  //sort the array in a-z order before doing binary search
+					
+					
+					//convert guess to UPPPERCASE
+					guess = (guess.toUpperCase());
+					
+					
+					
+					System.out.println("You guessed " + guess);
+					
+					
+					
+					//check to see if guess is in the hangWord array			
+					if(hangWord.indexOf(guess) == -1)	
+					{
+						System.out.println("That letter is not in this word");
+						badTries++;
+					}
+					
+					else
+						{
+						System.out.println("yes - that letter is in this word");
+						System.out.println((hangWord.indexOf(guess)));
+						index = hangWord.indexOf(guess);
+						userWord[index] = guess;           //add letter to userWord[] in the correct location
+						match = compareWords(userWord);    //check to see if the word is complete
+						
+						}
+					System.out.println("Number of incorrect guesses so far : " + badTries);	
+					int left = 0;
+					left = 10-badTries;
+					System.out.println("you have left : " + left + "tries" );
+					
+					if (usedWord.contains(guess)) // pull the contain method to validate if the word has been guessed
+					{
+						System.out.println("That letter has already been guessed");
+					}
+					else 
+						usedWord.add(guess);
+						
+					
+					if(match)
+					{
+						System.out.println("Game over");
+					}
+					//add code to search for multiples of that char - later			
+					
+					
+				} //end of while loop
+				
+				if(match)	
+				{
+					System.out.println("GREAT JOB - you guess the word correctly");
+				}
+				else
+				{
+					System.out.println("OOPS - you have used up your tries.  The word is " + hangWord);
+				}
+				
+				
+				System.out.print("Is there another player? y/n\n");
+				answer = input.next().charAt(0);
+			
+				} while (answer == 'y');
+				
+				System.out.println("Thank you for playing the game");
+						
+				
+			}
+			public static boolean compareWords(String userWord1[])
+			{
+				boolean match = true;
+				
+				//loop here to see if userWord[] is full, has no "-"
+				
+				for(int i=0; i < userWord1.length; i++)
+				{
+					if(userWord1[i].equals("-"))
+						match = false;
+				}
+				return match;
+			}
+			
+		
+
+	}
+
+
+ 
