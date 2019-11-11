@@ -1,0 +1,93 @@
+package newPackage;
+
+import java.util.Scanner;
+import week15.VendingProduct;
+
+public class TestVendingMachine {
+
+	public static void main(String[] args) {
+		
+				
+				
+				// create prod1 object
+				VendingProduct prod1 = new VendingProduct();
+				prod1.setId(1);
+				prod1.setPrice(3);
+				prod1.setProdName("Lays");
+				
+				
+				
+				Scanner input = new Scanner(System.in);
+				
+			// get deposit from user
+			// make them choose product
+			// verify if they have enough credit for the product
+			// calculate total of products
+			// calculate change
+			// dispend change and products
+				
+				
+			}
+
+		}
+
+	}
+
+}
+
+package week15;
+
+public class VendingProduct {
+
+	private double price = 0.0;
+	private String prodName = "";
+	private  int prodId = 0;
+	
+	
+	
+	public void setPrice(double newPrice)
+	{
+		price = newPrice;
+	}
+	public void setProdName(String newProdName)
+	{
+		prodName = newProdName;
+	}
+	public void setId(int newId)
+	{
+		prodId = newId;
+	}
+	public double getPrice()
+	{
+		return price;
+	}
+	public String getProdName()
+	{
+		return prodName;
+	}
+	public int getProdId()
+	{
+		return prodId;
+	}
+	
+	public int calsTotal()
+	{
+		double total = 0.0;
+		total += price;
+		return (int) total;
+	}
+	public double deposit()
+	{
+		int deposit = 0;
+		return deposit;
+	}
+	public double change()
+	{
+		int deposit = 0;
+		int change = deposit - calsTotal();
+		return change;
+	}
+	
+	
+}
+
