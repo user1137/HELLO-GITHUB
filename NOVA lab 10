@@ -1,0 +1,126 @@
+public class Lab10 {
+
+	public static void main(String[] args) { // mainnn
+		
+		Car c1 = new Car();  // car and truck objects
+		Truck t1 = new Truck();
+
+		c1.setMake("Toyota");
+		c1.setModel("Supra");
+		c1.setOdometer(22234); // set properties for car
+		c1.setNumPassengers(2);
+		
+		c1.displayVehicleInfo(); // display vehicle and car info
+		c1.displayCarInfo();
+		
+		t1.setMake("Toyota");
+		t1.setModel("Tacoma"); // set properties for truck
+		t1.setOdometer(888991);
+		t1.setTowCapacity(3);
+	
+		
+		t1.displayVehicleInfo(); // display vehicle and car info
+		t1.displayTruckInfo();
+		System.out.println("commercial :" + t1.commercial());
+		
+	}
+
+}
+
+
+public class Vehicle { // super class vehicle
+
+	// properties 
+	
+	private String make = ""; // 3 properties
+	private String model = "";
+	private int Odometer = 0;
+	
+	Vehicle(){
+			
+	}
+	
+	Vehicle(String newMake, String newModel, int newOdometer){
+		
+		this.make = newMake;
+		this.model = newModel;
+		this.Odometer = newOdometer;
+	}
+	
+	// set method
+	
+	public void setMake(String newMake) {
+		this.make = newMake;
+	}
+	public void setModel(String newModel) {
+		this.model = newModel;
+	}
+	public void setOdometer(int newOdometer) {
+		this.Odometer = newOdometer;
+	}
+	// get method
+	
+	public String getMake() {
+		return this.make;
+	}
+	public String getModel() {
+		return this.model;
+	}
+	public int getOdometer() {
+		return this.Odometer;
+	}
+	public void displayVehicleInfo() { // display vehicle info
+		System.out.println(this.make + " " + this.model + " " + this.Odometer);
+	}
+}
+
+
+public class Car extends Vehicle { // extends from vehicle 
+
+	private int numPassengers; // set passenger number
+	
+	public void setNumPassengers(int newNumPassengers) {
+		this.numPassengers = newNumPassengers;
+	}
+	public int getNumPassengers() {
+		return this.numPassengers;
+	}
+	
+	public void displayCarInfo() {
+		System.out.println("number of the passenger fit in :" + this.numPassengers);
+	}
+	
+}
+
+
+
+public class Truck extends Vehicle{
+	
+	private int towCapacity = 0;
+	
+	
+	// set and get tow capacity
+	public void setTowCapacity(int newTowCapacity) {
+		this.towCapacity = newTowCapacity;
+	}
+	public int getTowCapacity() {
+		return this.towCapacity;
+	}
+	
+	
+	// method to show if the truck is commercial truck or not
+	public boolean commercial() {
+		if (this.towCapacity >= 1)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	public void displayTruckInfo() {
+		System.out.println("this truck can tow " + this.towCapacity);
+	}
+}
+
+
+ 
